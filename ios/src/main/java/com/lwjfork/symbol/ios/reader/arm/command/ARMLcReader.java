@@ -57,7 +57,7 @@ public class ARMLcReader extends BaseAssignBytesCountReader<ARMLc, ARMLcBytes> {
             } else if (commandType == LoadCommandType.LC_SYMTAB) { // symTab
                 lcBytes.lcSymTab = new LcSymTabReader(commandOffset, accessFile, commandSize, armSymbolBytes).readBytesFinal();
             } else if (commandType == LoadCommandType.LC_SEGMENT) { // segment
-                lcBytes.segments.add(new ARMLcSegmentReader(commandOffset, accessFile, commandSize).readBytesFinal());
+                lcBytes.segments.add(new ARMLcSegmentReader(commandOffset, accessFile, commandSize,armSymbolBytes).readBytesFinal());
             }
             commandOffset = commandOffset + commandSize;
         }

@@ -3,6 +3,7 @@ package com.lwjfork.symbol.ios.reader.arm.command;
 import com.lwjfork.symbol.ios.mapper.arm.ARMLcMapper;
 import com.lwjfork.symbol.ios.model.arm.command.ARMLcSegment;
 import com.lwjfork.symbol.ios.reader.common.base.BaseAssignBytesCountReader;
+import com.lwjfork.symbol.ios.vo.arm.ARMSymbolBytes;
 import com.lwjfork.symbol.ios.vo.arm.command.ARMLcSectionHeaderBytes;
 import com.lwjfork.symbol.ios.vo.arm.command.ARMLcSegmentBytes;
 import com.lwjfork.symbol.tools.mapper.Bytes2LongMapper;
@@ -12,9 +13,11 @@ import java.io.RandomAccessFile;
 
 public class ARMLcSegmentReader extends BaseAssignBytesCountReader<ARMLcSegment, ARMLcSegmentBytes> {
 
+    ARMSymbolBytes armSymbolBytes;
 
-    public ARMLcSegmentReader(long offset, RandomAccessFile accessFile, long maxBytesCount) {
+    public ARMLcSegmentReader(long offset, RandomAccessFile accessFile, long maxBytesCount, ARMSymbolBytes armSymbolBytes) {
         super(offset, accessFile, maxBytesCount);
+        this.armSymbolBytes = armSymbolBytes;
     }
 
 
@@ -38,7 +41,7 @@ public class ARMLcSegmentReader extends BaseAssignBytesCountReader<ARMLcSegment,
         ARMLcSegmentBytes lcSegmentBytes = new ARMLcSegmentBytes();
         lcSegmentBytes.command = read4Bytes(true);
         lcSegmentBytes.commandSize = read4Bytes(true);
-        lcSegmentBytes.segmentName = read16Bytes(true);
+        lcSegmentBytes.segmentName = read16Bytes();
         lcSegmentBytes.vmAddress = read4Bytes(true);
         lcSegmentBytes.vmSize = read4Bytes(true);
         lcSegmentBytes.fileOffset = read4Bytes(true);
@@ -54,7 +57,7 @@ public class ARMLcSegmentReader extends BaseAssignBytesCountReader<ARMLcSegment,
         if (sectionNum > 0L) {
             long sectionHeaderOffset = offset + bytesCount;
             for (long i = 0; i < sectionNum; i++) {
-                ARMLcSectionHeaderBytes sectionHeaderBytes = new ARMLcSectionHeaderReader(sectionHeaderOffset, accessFile).readBytesFinal();
+                ARMLcSectionHeaderBytes sectionHeaderBytes = new ARMLcSectionHeaderReader(sectionHeaderOffset, accessFile,armSymbolBytes).readBytesFinal();
                 lcSegmentBytes.sectionHeaders.add(sectionHeaderBytes);
                 sectionHeaderOffset = sectionHeaderOffset + sectionHeaderBytes.useBytesCount;
             }

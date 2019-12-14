@@ -1,6 +1,7 @@
 package com.lwjfork.symbol.ios.mapper.arm;
 
 import com.lwjfork.symbol.ios.mapper.common.BaseLcMapper;
+import com.lwjfork.symbol.ios.mapper.common.PowerMapper;
 import com.lwjfork.symbol.ios.mapper.common.SectionOrSegmentNamMapper;
 import com.lwjfork.symbol.ios.model.arm.command.ARMLc;
 import com.lwjfork.symbol.ios.model.arm.command.ARMLcSectionHeader;
@@ -17,6 +18,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(uses = {
         Bytes2LongMapper.class,
         BytesAsciiStr2StrMapper.class,
+        PowerMapper.class,
         BaseLcMapper.class})
 public interface ARMLcMapper {
 
@@ -32,6 +34,7 @@ public interface ARMLcMapper {
 
     @Mapping(source = "segmentName", target = "segmentName", qualifiedByName = {SectionOrSegmentNamMapper.SectionOrSegmentNamMapper, SectionOrSegmentNamMapper.convertName})
     @Mapping(source = "sectionName", target = "sectionName", qualifiedByName = {SectionOrSegmentNamMapper.SectionOrSegmentNamMapper, SectionOrSegmentNamMapper.convertName})
+    @Mapping(source = "alignment", target = "alignment", qualifiedByName = {PowerMapper.PowerMapper, PowerMapper.byte4ToPower})
     ARMLcSectionHeader bytes2Model(ARMLcSectionHeaderBytes bytes);
 
 

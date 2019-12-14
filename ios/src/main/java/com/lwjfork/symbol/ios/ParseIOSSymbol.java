@@ -83,7 +83,7 @@ public class ParseIOSSymbol {
     private void parseARMSymbol(Byte4 magicBytes, RandomAccessFile accessFile, long bytesCount) throws IOException {
         ARMSymbolReader symbolReader = new ARMSymbolReader(magicBytes, accessFile, bytesCount);
         ARMSymbol symbol = symbolReader.read();
-        System.out.println(symbol.stringTable.content);
+        System.out.println(symbol.stringTable);
     }
 
     /**
@@ -97,6 +97,6 @@ public class ParseIOSSymbol {
     private void parseARM64Symbol(Byte4 magicBytes, RandomAccessFile accessFile, long bytesCount) throws IOException {
         ARM64SymbolReader symbolReader = new ARM64SymbolReader(magicBytes, accessFile, bytesCount);
         ARM64Symbol symbol = symbolReader.read();
-        System.out.println(symbol.stringTable.content);
+        System.out.println(symbol.stringTable);
     }
 }

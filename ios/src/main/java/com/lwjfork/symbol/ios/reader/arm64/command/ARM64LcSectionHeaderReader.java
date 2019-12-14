@@ -3,6 +3,7 @@ package com.lwjfork.symbol.ios.reader.arm64.command;
 import com.lwjfork.symbol.ios.mapper.arm64.ARM64LcMapper;
 import com.lwjfork.symbol.ios.model.arm64.command.ARM64LcSectionHeader;
 import com.lwjfork.symbol.ios.reader.common.base.BaseAssignBytesCountReader;
+import com.lwjfork.symbol.ios.vo.arm64.ARM64SymbolBytes;
 import com.lwjfork.symbol.ios.vo.arm64.command.ARM64LcSectionHeaderBytes;
 
 import java.io.IOException;
@@ -11,10 +12,11 @@ import java.io.RandomAccessFile;
 
 public class ARM64LcSectionHeaderReader extends BaseAssignBytesCountReader<ARM64LcSectionHeader, ARM64LcSectionHeaderBytes> {
 
+    ARM64SymbolBytes armSymbolBytes;
 
-    public ARM64LcSectionHeaderReader(long offset, RandomAccessFile accessFile) {
+    public ARM64LcSectionHeaderReader(long offset, RandomAccessFile accessFile, ARM64SymbolBytes armSymbolBytes) {
         super(offset, accessFile, 80);
-
+        this.armSymbolBytes = armSymbolBytes;
     }
 
     @Override
@@ -33,8 +35,8 @@ public class ARM64LcSectionHeaderReader extends BaseAssignBytesCountReader<ARM64
     protected ARM64LcSectionHeaderBytes readBytes() throws IOException {
         accessFile.seek(offset);
         ARM64LcSectionHeaderBytes bytes = new ARM64LcSectionHeaderBytes();
-        bytes.sectionName = read16Bytes(true);
-        bytes.segmentName = read16Bytes(true);
+        bytes.sectionName = read16Bytes();
+        bytes.segmentName = read16Bytes();
         bytes.address = read8Bytes(true);
         bytes.size = read8Bytes(true);
         bytes.offset = read4Bytes(true);
