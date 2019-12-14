@@ -23,7 +23,7 @@ public class ARM64LcSegmentReader extends BaseAssignBytesCountReader<ARM64LcSegm
 
     @Override
     protected ARM64LcSegment convertBytes2Model(ARM64LcSegmentBytes bytes) {
-        return ARM64LcMapper.INSTANCE.bytes2Model(bytes);
+        return ARM64LcMapper.INSTANCE.bytes2ModelSegment(bytes);
     }
 
 

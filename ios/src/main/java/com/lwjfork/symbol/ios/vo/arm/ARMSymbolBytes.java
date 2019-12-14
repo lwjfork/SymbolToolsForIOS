@@ -10,5 +10,4 @@ public class ARMSymbolBytes extends BaseSymbolBytes {
 
     public ARMLcBytes lc;
 
-
 }

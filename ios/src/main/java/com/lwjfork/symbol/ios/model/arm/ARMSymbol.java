@@ -4,9 +4,11 @@ import com.lwjfork.symbol.ios.model.arm.command.ARMLc;
 import com.lwjfork.symbol.ios.model.arm.mach_header.ARMMachHeader;
 import com.lwjfork.symbol.ios.model.common.base.BaseModel;
 import com.lwjfork.symbol.ios.model.common.base.BytesCountStr;
+import com.lwjfork.symbol.ios.model.common.section.SectionContent;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class ARMSymbol extends BaseModel {
@@ -20,7 +22,7 @@ public class ARMSymbol extends BaseModel {
     public BytesCountStr stringTable;
 
 
-    public ArrayList<BytesCountStr> section = new ArrayList<>();
+    public List<SectionContent> section = new ArrayList<>();
 
 
     @Override

@@ -16,6 +16,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 
 @Mapper(uses = {
         Bytes2LongMapper.class,
@@ -32,13 +34,16 @@ public interface ARM64LcMapper {
     ARM64Lc bytes2Model(ARM64LcBytes bytes);
 
     @Mapping(source = "segmentName", target = "segmentName", qualifiedByName = {SectionOrSegmentNamMapper.SectionOrSegmentNamMapper, SectionOrSegmentNamMapper.convertName})
-    ARM64LcSegment bytes2Model(ARM64LcSegmentBytes bytes);
+    ARM64LcSegment bytes2ModelSegment(ARM64LcSegmentBytes bytes);
 
 
     @Mapping(source = "segmentName", target = "segmentName", qualifiedByName = {SectionOrSegmentNamMapper.SectionOrSegmentNamMapper, SectionOrSegmentNamMapper.convertName})
     @Mapping(source = "sectionName", target = "sectionName", qualifiedByName = {SectionOrSegmentNamMapper.SectionOrSegmentNamMapper, SectionOrSegmentNamMapper.convertName})
     @Mapping(source = "alignment", target = "alignment", qualifiedByName = {PowerMapper.PowerMapper, PowerMapper.byte4ToPower})
-    ARM64LcSectionHeader bytes2Model(ARM64LcSectionHeaderBytes bytes);
+    ARM64LcSectionHeader bytes2SectionHeader(ARM64LcSectionHeaderBytes bytes);
 
 
+    List<ARM64LcSectionHeader> bytes2SectionHeader(List<ARM64LcSectionHeaderBytes> bytes);
+
+    List<ARM64LcSegment> bytes2ModelSegment(List<ARM64LcSegmentBytes> bytes);
 }

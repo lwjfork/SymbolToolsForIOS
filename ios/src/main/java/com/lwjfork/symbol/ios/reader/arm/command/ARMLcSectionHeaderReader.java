@@ -3,8 +3,11 @@ package com.lwjfork.symbol.ios.reader.arm.command;
 import com.lwjfork.symbol.ios.mapper.arm.ARMLcMapper;
 import com.lwjfork.symbol.ios.model.arm.command.ARMLcSectionHeader;
 import com.lwjfork.symbol.ios.reader.common.base.BaseAssignBytesCountReader;
+import com.lwjfork.symbol.ios.reader.common.command.SectionContentReader;
 import com.lwjfork.symbol.ios.vo.arm.ARMSymbolBytes;
 import com.lwjfork.symbol.ios.vo.arm.command.ARMLcSectionHeaderBytes;
+import com.lwjfork.symbol.ios.vo.common.section.SectionContentBytes;
+import com.lwjfork.symbol.tools.mapper.Bytes2LongMapper;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -29,7 +32,7 @@ public class ARMLcSectionHeaderReader extends BaseAssignBytesCountReader<ARMLcSe
 
     @Override
     protected ARMLcSectionHeader convertBytes2Model(ARMLcSectionHeaderBytes bytes) {
-        return ARMLcMapper.INSTANCE.bytes2Model(bytes);
+        return ARMLcMapper.INSTANCE.bytes2SectionHeader(bytes);
     }
 
     @Override
@@ -48,8 +51,13 @@ public class ARMLcSectionHeaderReader extends BaseAssignBytesCountReader<ARMLcSe
         bytes.reserved1OrIndexOfIS = read4Bytes(true);
         bytes.reserved2OrSizeOfStubs = read4Bytes(true);
 
-
-
+        long sectionOppositeOffset = Bytes2LongMapper.INSTANCE.byte4ToLong(bytes.offset);
+        if (sectionOppositeOffset > 0) {
+            long sectionSize = Bytes2LongMapper.INSTANCE.byte4ToLong(bytes.size);
+            long sectionOffset = sectionOppositeOffset + armSymbolBytes.offsetOfBytes;
+            SectionContentBytes sectionContentBytes = new SectionContentReader(sectionOffset, accessFile, sectionSize, bytes).readBytesFinal();
+            armSymbolBytes.section.add(sectionContentBytes);
+        }
         return bytes;
     }
 }

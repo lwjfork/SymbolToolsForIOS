@@ -28,6 +28,10 @@ public abstract class AssignCountBytes {
     public long offsetOfBytes;
 
 
+    public void setStrictConvertMode(boolean strictConvertMode) {
+        isStrictConvertMode = strictConvertMode;
+    }
+
     public AssignCountBytes(byte[] bytes) {
         this(bytes, "unKnow");
     }
@@ -118,9 +122,9 @@ public abstract class AssignCountBytes {
     private void throwException(int maxCount, String suggestMethodName) {
         boolean isThrow = false;
         if (isStrictConvertMode) {
-            isThrow = maxCount < bytes.length;
-        } else {
             isThrow = maxCount <= bytes.length;
+        } else {
+            isThrow = maxCount < bytes.length;
         }
         if (isThrow) {
             throw new UnsupportedOperationException("The length of byte array is " + bytesCount + " you should use the method-[ " + suggestMethodName + " ]");
@@ -178,7 +182,7 @@ public abstract class AssignCountBytes {
         if (isEndian) {
             bytes = convert2Endian();
         }
-        return ByteUtil.bytes2Long(bytes);
+        return ByteUtil.bytes2Long(bytes, isStrictConvertMode);
     }
 
     /**

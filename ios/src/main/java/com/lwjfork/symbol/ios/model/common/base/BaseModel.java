@@ -7,6 +7,8 @@ public abstract class BaseModel {
 
     public long useBytesCount;
 
-    public String offsetOfBytes;
+    public String offsetHexStrOfBytes;
+
+    public long offsetOfBytes;
 
 }
