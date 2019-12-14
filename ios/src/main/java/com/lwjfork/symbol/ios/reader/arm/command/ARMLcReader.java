@@ -6,6 +6,7 @@ import com.lwjfork.symbol.ios.model.arm.command.ARMLc;
 import com.lwjfork.symbol.ios.reader.common.base.BaseAssignBytesCountReader;
 import com.lwjfork.symbol.ios.reader.common.command.LcSymTabReader;
 import com.lwjfork.symbol.ios.reader.common.command.LcUUIDReader;
+import com.lwjfork.symbol.ios.vo.arm.ARMSymbolBytes;
 import com.lwjfork.symbol.ios.vo.arm.command.ARMLcBytes;
 import com.lwjfork.symbol.tools.mapper.Bytes2LongMapper;
 import com.lwjfork.symbol.tools.model.Byte4;
@@ -20,9 +21,12 @@ public class ARMLcReader extends BaseAssignBytesCountReader<ARMLc, ARMLcBytes> {
 
     long commandsNum;
 
-    public ARMLcReader(long offset, long commandsNum, RandomAccessFile accessFile, long maxBytesCount) {
+    ARMSymbolBytes armSymbolBytes;
+
+    public ARMLcReader(long offset, long commandsNum, RandomAccessFile accessFile, long maxBytesCount, ARMSymbolBytes armSymbolBytes) {
         super(offset, accessFile, maxBytesCount);
         this.commandsNum = commandsNum;
+        this.armSymbolBytes = armSymbolBytes;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class ARMLcReader extends BaseAssignBytesCountReader<ARMLc, ARMLcBytes> {
             if (commandType == LoadCommandType.LC_UUID) { // UUID
                 lcBytes.lcUUID = new LcUUIDReader(commandOffset, accessFile, commandSize).readBytesFinal();
             } else if (commandType == LoadCommandType.LC_SYMTAB) { // symTab
-                lcBytes.lcSymTab = new LcSymTabReader(commandOffset, accessFile, commandSize).readBytesFinal();
+                lcBytes.lcSymTab = new LcSymTabReader(commandOffset, accessFile, commandSize, armSymbolBytes).readBytesFinal();
             } else if (commandType == LoadCommandType.LC_SEGMENT) { // segment
                 lcBytes.segments.add(new ARMLcSegmentReader(commandOffset, accessFile, commandSize).readBytesFinal());
             }

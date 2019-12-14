@@ -6,7 +6,11 @@ import com.lwjfork.symbol.ios.model.arm64.command.ARM64Lc;
 import com.lwjfork.symbol.ios.reader.common.base.BaseAssignBytesCountReader;
 import com.lwjfork.symbol.ios.reader.common.command.LcSymTabReader;
 import com.lwjfork.symbol.ios.reader.common.command.LcUUIDReader;
+import com.lwjfork.symbol.ios.reader.common.command.StringTableReader;
+import com.lwjfork.symbol.ios.vo.arm64.ARM64SymbolBytes;
 import com.lwjfork.symbol.ios.vo.arm64.command.ARM64LcBytes;
+import com.lwjfork.symbol.ios.vo.common.base.BytesCountBytes;
+import com.lwjfork.symbol.ios.vo.common.command.LcSymTabBytes;
 import com.lwjfork.symbol.tools.mapper.Bytes2LongMapper;
 import com.lwjfork.symbol.tools.model.Byte4;
 
@@ -20,9 +24,12 @@ public class ARM64LcReader extends BaseAssignBytesCountReader<ARM64Lc, ARM64LcBy
 
     long commandsNum;
 
-    public ARM64LcReader(long offset, long commandsNum, RandomAccessFile accessFile, long maxBytesCount) {
+    ARM64SymbolBytes armSymbolBytes;
+
+    public ARM64LcReader(long offset, long commandsNum, RandomAccessFile accessFile, long maxBytesCount, ARM64SymbolBytes armSymbolBytes) {
         super(offset, accessFile, maxBytesCount);
         this.commandsNum = commandsNum;
+        this.armSymbolBytes = armSymbolBytes;
     }
 
     @Override
@@ -51,7 +58,7 @@ public class ARM64LcReader extends BaseAssignBytesCountReader<ARM64Lc, ARM64LcBy
             if (commandType == LoadCommandType.LC_UUID) { // UUID
                 lcBytes.lcUUID = new LcUUIDReader(commandOffset, accessFile, commandSize).readBytesFinal();
             } else if (commandType == LoadCommandType.LC_SYMTAB) { // symTab
-                lcBytes.lcSymTab = new LcSymTabReader(commandOffset, accessFile, commandSize).readBytesFinal();
+                lcBytes.lcSymTab = new LcSymTabReader(commandOffset, accessFile, commandSize,armSymbolBytes).readBytesFinal();
             } else if (commandType == LoadCommandType.LC_SEGMENT_64) {
                 lcBytes.segments.add(new ARM64LcSegmentReader(commandOffset, accessFile, commandSize).readBytesFinal());
             }
@@ -59,4 +66,8 @@ public class ARM64LcReader extends BaseAssignBytesCountReader<ARM64Lc, ARM64LcBy
         }
         return lcBytes;
     }
+
+
+
+
 }
