@@ -9,7 +9,7 @@ public abstract class BaseBytes {
 
     public long useBytesCount;
 
-    public String offset;
+    public String offsetOfBytes;
 
 
 

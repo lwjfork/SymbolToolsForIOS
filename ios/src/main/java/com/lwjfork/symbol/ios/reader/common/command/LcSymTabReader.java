@@ -35,6 +35,6 @@ public class LcSymTabReader extends BaseAssignBytesCountReader<LcSymTab, LcSymTa
     @Override
     protected void writeOffsetAndBytesCount(LcSymTabBytes bytes) {
         bytes.useBytesCount = maxBytesCount;
-        bytes.offset = getOffsetHexStr();
+        bytes.offsetOfBytes = getOffsetHexStr();
     }
 }

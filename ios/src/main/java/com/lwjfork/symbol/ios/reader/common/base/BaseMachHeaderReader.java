@@ -2,7 +2,6 @@ package com.lwjfork.symbol.ios.reader.common.base;
 
 import com.lwjfork.symbol.ios.model.common.base.BaseMachHeader;
 import com.lwjfork.symbol.ios.vo.arm.mach_header.ARMMachHeaderBytes;
-import com.lwjfork.symbol.tools.model.Byte4;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -29,7 +28,7 @@ public abstract class BaseMachHeaderReader<T extends BaseMachHeader, V extends A
 
     @Override
     protected void writeOffsetAndBytesCount(V bytes) {
-        bytes.offset = bytes.magicNum.offset;
+        bytes.offsetOfBytes = bytes.magicNum.offset;
         bytes.useBytesCount = bytesCount;
     }
 

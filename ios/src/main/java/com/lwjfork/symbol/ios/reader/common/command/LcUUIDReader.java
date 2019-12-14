@@ -32,6 +32,6 @@ public class LcUUIDReader extends BaseAssignBytesCountReader<LcUuid, LcUuidBytes
     @Override
     protected void writeOffsetAndBytesCount(LcUuidBytes bytes) {
         bytes.useBytesCount = maxBytesCount;
-        bytes.offset = getOffsetHexStr();
+        bytes.offsetOfBytes = getOffsetHexStr();
     }
 }

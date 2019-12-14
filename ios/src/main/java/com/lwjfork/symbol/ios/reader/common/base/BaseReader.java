@@ -1,7 +1,6 @@
 package com.lwjfork.symbol.ios.reader.common.base;
 
 import com.lwjfork.symbol.ios.vo.common.base.BaseBytes;
-import com.lwjfork.symbol.tools.model.*;
 import com.lwjfork.symbol.tools.uitls.ByteUtil;
 
 import java.io.IOException;
@@ -106,14 +105,12 @@ public abstract class BaseReader<T, V extends BaseBytes> extends BytesFileReader
 
     @Override
     public String getReadOffsetHexStr() {
-        return Long.toHexString(offset + bytesCount);
+        return Long.toHexString(offset + bytesCount).toUpperCase();
     }
 
     public String getOffsetHexStr() {
-        return Long.toHexString(offset);
+        return Long.toHexString(offset).toUpperCase();
     }
-
-
 
 
 }

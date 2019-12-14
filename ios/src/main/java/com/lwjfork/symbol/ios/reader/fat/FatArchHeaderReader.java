@@ -20,7 +20,7 @@ public class FatArchHeaderReader extends BaseAssignBytesCountReader<FatArchHeade
 
     @Override
     protected void writeOffsetAndBytesCount(FatArchHeaderBytes bytes) {
-        bytes.offset = bytes.cpuType.offset;
+        bytes.offsetOfBytes = bytes.cpuType.offset;
         bytes.useBytesCount = bytesCount;
     }
 

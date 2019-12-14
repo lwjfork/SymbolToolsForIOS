@@ -25,7 +25,7 @@ public class ARMSymbol extends BaseModel {
                 "machHeader=" + machHeader +
                 ", lc=" + lc +
                 ", useBytesCount=" + useBytesCount +
-                ", offset='" + offset + '\'' +
+                ", offset='" + offsetOfBytes + '\'' +
                 '}';
     }
 

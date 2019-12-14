@@ -1,4 +1,4 @@
-package com.lwjfork.symbol.ios.mapper.arm64;
+package com.lwjfork.symbol.ios.mapper.common;
 
 import com.lwjfork.symbol.tools.model.Byte16;
 import org.mapstruct.Named;

@@ -52,7 +52,7 @@ public class ByteUtil {
         ByteBuffer buffer = ByteBuffer.allocate(8);
         int length = bytes.length;
         if (length >= 8) {
-            throw new IllegalArgumentException("Java 中 long 基本类型四个字节，但是字节数组的长度为 " + length);
+            throw new IllegalArgumentException("Java 中 long 基本类型八个字节，但是字节数组的长度为 " + length);
         }
         int leftSpace = 8 - bytes.length;
         byte[] sub = new byte[leftSpace];

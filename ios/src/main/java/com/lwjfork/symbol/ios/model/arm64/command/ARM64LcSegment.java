@@ -4,33 +4,44 @@ import com.lwjfork.symbol.ios.model.common.base.BaseCommand;
 import lombok.Data;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class ARM64LcSegment extends BaseCommand {
 
-    // 16 字节
+
     public String segmentName;
-
-    // 8 字节
-    public BigInteger VMAddress;
-
-    //  8 字节
-    public BigInteger VMSize;
-
-    //  8 字节
+    public BigInteger vmAddress;
+    public BigInteger vmSize;
     public BigInteger fileOffset;
-
-    //  8 字节
     public BigInteger fileSize;
-
-    // 4 字节
-    public long maxVMProtection;
-    // 4 字节
-    public long initialVMProtection;
-    // 4 字节
+    public long maxVmProtection;
+    public long initialVmProtection;
     public long sectionsNum;
-    // 4 字节
     public long flags;
 
 
+    public List<ARM64LcSectionHeader> sectionHeaders = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "ARM64LcSegment{" +
+                "segmentName='" + segmentName + '\'' +
+                ", vmAddress=" + vmAddress +
+                ", vmSize=" + vmSize +
+                ", fileOffset=" + fileOffset +
+                ", fileSize=" + fileSize +
+                ", maxVmProtection=" + maxVmProtection +
+                ", initialVmProtection=" + initialVmProtection +
+                ", sectionsNum=" + sectionsNum +
+                ", flags=" + flags +
+                ", sectionHeaders=" + sectionHeaders +
+                ", command=" + command +
+                ", commandSize=" + commandSize +
+                ", useBytesCount=" + useBytesCount +
+                ", offsetOfBytes='" + offsetOfBytes + '\'' +
+                '}';
+    }
 }
+

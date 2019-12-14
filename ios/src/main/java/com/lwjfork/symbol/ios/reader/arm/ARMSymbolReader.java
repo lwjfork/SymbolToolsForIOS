@@ -28,7 +28,7 @@ public class ARMSymbolReader extends BaseAssignBytesCountReader<ARMSymbol, ARMSy
 
     @Override
     protected void writeOffsetAndBytesCount(ARMSymbolBytes bytes) {
-        bytes.offset = getOffsetHexStr();
+        bytes.offsetOfBytes = getOffsetHexStr();
         bytes.useBytesCount = maxBytesCount;
     }
 

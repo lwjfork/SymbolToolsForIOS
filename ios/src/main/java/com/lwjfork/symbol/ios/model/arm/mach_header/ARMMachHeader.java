@@ -10,7 +10,7 @@ public class ARMMachHeader extends BaseMachHeader {
     @Override
     public String toString() {
         return "MachHeader{" +
-                "offset=" + offset +
+                "offset=" + offsetOfBytes +
                 ", magicNum=" + magicNum +
                 ", cpuType=" + cpuType +
                 ", cpuSubType=" + cpuSubType +

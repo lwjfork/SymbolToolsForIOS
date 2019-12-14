@@ -3,32 +3,42 @@ package com.lwjfork.symbol.ios.model.arm.command;
 import com.lwjfork.symbol.ios.model.common.base.BaseCommand;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class ARMLcSegment extends BaseCommand {
 
-    // 16 字节
     public String segmentName;
-
-    // 4  字节
-    public long VMAddress;
-
-    // 4  字节
-    public long VMSize;
-
-    // 4  字节
+    public long vmAddress;
+    public long vmSize;
     public long fileOffset;
-
-    // 4  字节
     public long fileSize;
-
-    // 4 字节
-    public long maxVMProtection;
-    // 4 字节
-    public long initialVMProtection;
-    // 4 字节
+    public long maxVmProtection;
+    public long initialVmProtection;
     public long sectionsNum;
-    // 4 字节
     public long flags;
 
 
+    public List<ARMLcSectionHeader> sectionHeaders = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "ARMLcSegment{" +
+                "segmentName='" + segmentName + '\'' +
+                ", vmAddress=" + vmAddress +
+                ", vmSize=" + vmSize +
+                ", fileOffset=" + fileOffset +
+                ", fileSize=" + fileSize +
+                ", maxVmProtection=" + maxVmProtection +
+                ", initialVmProtection=" + initialVmProtection +
+                ", sectionsNum=" + sectionsNum +
+                ", flags=" + flags +
+                ", sectionHeaders=" + sectionHeaders +
+                ", command=" + command +
+                ", commandSize=" + commandSize +
+                ", useBytesCount=" + useBytesCount +
+                ", offsetOfBytes='" + offsetOfBytes + '\'' +
+                '}';
+    }
 }

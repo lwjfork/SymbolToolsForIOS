@@ -27,7 +27,7 @@ public class ARMLcReader extends BaseAssignBytesCountReader<ARMLc, ARMLcBytes> {
 
     @Override
     protected void writeOffsetAndBytesCount(ARMLcBytes bytes) {
-        bytes.offset = getOffsetHexStr();
+        bytes.offsetOfBytes = getOffsetHexStr();
         bytes.useBytesCount = maxBytesCount;
     }
 
@@ -51,9 +51,9 @@ public class ARMLcReader extends BaseAssignBytesCountReader<ARMLc, ARMLcBytes> {
                 lcBytes.lcUUID = new LcUUIDReader(commandOffset, accessFile, commandSize).readBytesFinal();
             } else if (commandType == LoadCommandType.LC_SYMTAB) { // symTab
                 lcBytes.lcSymTab = new LcSymTabReader(commandOffset, accessFile, commandSize).readBytesFinal();
+            } else if (commandType == LoadCommandType.LC_SEGMENT) { // segment
+                lcBytes.segments.add(new ARMLcSegmentReader(commandOffset, accessFile, commandSize).readBytesFinal());
             }
-
-
             commandOffset = commandOffset + commandSize;
         }
         return lcBytes;

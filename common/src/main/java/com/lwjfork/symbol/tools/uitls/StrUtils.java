@@ -35,6 +35,15 @@ public class StrUtils {
         }
     }
 
+
+    public static String asciiBytesToString(byte[] source, boolean isTrim) {
+
+        String hexStr = ByteUtil.bytes2HexStr(source);
+
+        return asciiStrToString(hexStr, isTrim);
+    }
+
+
     /**
      * 大小端转换
      *

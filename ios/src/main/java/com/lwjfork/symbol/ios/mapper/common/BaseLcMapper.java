@@ -1,6 +1,5 @@
 package com.lwjfork.symbol.ios.mapper.common;
 
-import com.lwjfork.symbol.ios.mapper.arm64.UUIDMapper;
 import com.lwjfork.symbol.ios.model.common.command.LcSymTab;
 import com.lwjfork.symbol.ios.model.common.command.LcUuid;
 import com.lwjfork.symbol.ios.vo.common.command.LcSymTabBytes;

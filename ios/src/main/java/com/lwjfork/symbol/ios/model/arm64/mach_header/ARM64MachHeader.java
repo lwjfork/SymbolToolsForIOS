@@ -13,7 +13,7 @@ public class ARM64MachHeader extends BaseMachHeader {
     @Override
     public String toString() {
         return "MachHeader_64{" +
-                "  offset=" + offset +
+                "  offset=" + offsetOfBytes +
                 ", magicNum=" + magicNum +
                 ", cpuType=" + cpuType +
                 ", cpuSubType=" + cpuSubType +

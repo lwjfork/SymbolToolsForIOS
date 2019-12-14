@@ -23,7 +23,7 @@ public class LcSymTab extends BaseCommand {
                 ", command=" + command +
                 ", commandSize=" + commandSize +
                 ", useBytesCount=" + useBytesCount +
-                ", offset='" + offset + '\'' +
+                ", offset='" + offsetOfBytes + '\'' +
                 '}';
     }
 }

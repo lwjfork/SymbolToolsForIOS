@@ -83,7 +83,7 @@ public class ParseIOSSymbol {
     private void parseARMSymbol(Byte4 magicBytes, RandomAccessFile accessFile, long bytesCount) throws IOException {
         ARMSymbolReader symbolReader = new ARMSymbolReader(magicBytes, accessFile, bytesCount);
         ARMSymbol symbol = symbolReader.read();
-        System.out.println(symbol.toString());
+//        System.out.println(symbol.toString());
     }
 
     /**

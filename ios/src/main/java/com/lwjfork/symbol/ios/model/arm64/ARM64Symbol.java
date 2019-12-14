@@ -13,13 +13,15 @@ public class ARM64Symbol extends BaseModel {
 
     public ARM64Lc lc;
 
+
+
     @Override
     public String toString() {
         return "ARM64Symbol{" +
                 "machHeader=" + machHeader +
                 ", lc=" + lc +
                 ", useBytesCount=" + useBytesCount +
-                ", offset='" + offset + '\'' +
+                ", offset='" + offsetOfBytes + '\'' +
                 '}';
     }
 }

@@ -7,6 +7,6 @@ public abstract class BaseModel {
 
     public long useBytesCount;
 
-    public String offset;
+    public String offsetOfBytes;
 
 }

@@ -1,6 +1,7 @@
 package com.lwjfork.symbol.tools.model;
 
 import com.lwjfork.symbol.tools.uitls.ByteUtil;
+import com.lwjfork.symbol.tools.uitls.StrUtils;
 
 import java.math.BigInteger;
 
@@ -186,4 +187,50 @@ public abstract class AssignCountBytes {
         return new BigInteger(1, bytes);
     }
 
+    /**
+     * 将字节转换成为字符串，其中字节代表了 Ascii 码的字节
+     *
+     * @param isEndian 是否是大小端模式
+     * @param isTrim   是否 trim
+     * @return 字符串
+     */
+    public String asciiBytesToStr(boolean isEndian, boolean isTrim) {
+        if (isEndian) {
+            bytes = convert2Endian();
+        }
+        return StrUtils.asciiBytesToString(bytes, isTrim);
+    }
+
+
+    /**
+     * 将字节转换成为字符串，其中字节代表了 Ascii 码的字节
+     *
+     * @param isEndian 是否是大小端模式
+     * @return 字符串
+     */
+    public String asciiBytesToStrByTrim(boolean isEndian) {
+        return asciiBytesToStr(isEndian, true);
+    }
+
+
+
+    /**
+     * 将字节转换成为字符串，其中字节代表了 Ascii 码的字节
+     *
+     * @return 字符串
+     */
+    public String asciiBytesToStr() {
+        return asciiBytesToStr(true, true);
+    }
+
+
+
+    /**
+     * 将字节转换成为字符串，其中字节代表了 Ascii 码的字节
+     *
+     * @return 字符串
+     */
+    public String asciiBytesToStrByEndian(boolean isEndian) {
+        return asciiBytesToStr(isEndian, true);
+    }
 }
