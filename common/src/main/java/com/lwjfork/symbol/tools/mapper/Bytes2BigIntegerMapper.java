@@ -42,4 +42,7 @@ public class Bytes2BigIntegerMapper {
     public BigInteger byte64ToBigInteger(Byte64 bytes) {
         return bytes.convertBitInteger();
     }
+    public BigInteger bytesToBigInteger(BytesCount bytes) {
+        return bytes.convertBitInteger();
+    }
 }

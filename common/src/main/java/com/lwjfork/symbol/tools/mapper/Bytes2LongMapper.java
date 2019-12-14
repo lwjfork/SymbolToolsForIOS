@@ -39,4 +39,7 @@ public class Bytes2LongMapper {
     public long byte64ToLong(Byte64 bytes) {
         return bytes.convert2Long();
     }
+    public long bytesToLong(BytesCount bytes) {
+        return bytes.convert2Long();
+    }
 }

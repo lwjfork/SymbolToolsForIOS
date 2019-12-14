@@ -39,4 +39,7 @@ public class Bytes2IntMapper {
     public int byte64ToInt(Byte64 bytes) {
         return bytes.convert2Int();
     }
+    public int bytesToInt(BytesCount bytes) {
+        return bytes.convert2Int();
+    }
 }

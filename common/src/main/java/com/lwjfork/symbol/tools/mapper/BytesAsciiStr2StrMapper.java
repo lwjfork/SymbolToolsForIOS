@@ -40,4 +40,7 @@ public class BytesAsciiStr2StrMapper {
     public String byte64AsciiToStr(Byte64 bytes) {
         return bytes.asciiBytesToStr();
     }
+    public String bytesAsciiToStr(BytesCount bytes) {
+        return bytes.asciiBytesToStr();
+    }
 }

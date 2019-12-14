@@ -38,4 +38,7 @@ public class Bytes2HexStrMapper {
     public String byte64ToStr(Byte64 bytes) {
         return bytes.convert2HexStr();
     }
+    public String bytesToStr(BytesCount bytes) {
+        return bytes.convert2HexStr();
+    }
 }
