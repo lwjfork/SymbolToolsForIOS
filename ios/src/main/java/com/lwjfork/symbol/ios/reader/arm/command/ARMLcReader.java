@@ -27,7 +27,8 @@ public class ARMLcReader extends BaseAssignBytesCountReader<ARMLc, ARMLcBytes> {
 
     @Override
     protected void writeOffsetAndBytesCount(ARMLcBytes bytes) {
-        bytes.offsetOfBytes = getOffsetHexStr();
+        bytes.offsetHexStrOfBytes = getOffsetHexStr();
+        bytes.offsetOfBytes = getOffset();
         bytes.useBytesCount = maxBytesCount;
     }
 

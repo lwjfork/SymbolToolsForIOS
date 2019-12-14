@@ -41,6 +41,10 @@ public abstract class BytesFileReader {
         return read64Bytes(false);
     }
 
+    public BytesCount readAssignCountBytes(int bytesCount) throws IOException {
+        return readAssignCountBytes(bytesCount, false);
+    }
+
 
     public Byte1 readByte(boolean isEndian) throws IOException {
         String offset = getReadOffsetHexStr();
@@ -75,6 +79,12 @@ public abstract class BytesFileReader {
     public Byte64 read64Bytes(boolean isEndian) throws IOException {
         String offset = getReadOffsetHexStr();
         return new Byte64(readBytes(64, isEndian), offset);
+    }
+
+
+    private BytesCount readAssignCountBytes(int bytesCount, boolean isEndian) throws IOException {
+        String offset = getReadOffsetHexStr();
+        return new BytesCount(readBytes(bytesCount, isEndian), offset);
     }
 
 

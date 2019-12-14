@@ -25,7 +25,7 @@ public class ParseIOSSymbol {
             randomAccessFile = new RandomAccessFile(filePath, "r");
             byte[] bytes = new byte[4];
             randomAccessFile.read(bytes);
-            Byte4 magicBytes = new Byte4(bytes);
+            Byte4 magicBytes = new Byte4(bytes, "0");
             long magicNumber = Bytes2LongMapper.INSTANCE.byte4ToLong(magicBytes);
             if (magicNumber == FatMagicNum.FAT_MAGIC) {
                 FatHeader fatHeader = new FatHeaderReader(randomAccessFile).read();
@@ -57,7 +57,7 @@ public class ParseIOSSymbol {
         accessFile.seek(offset);
         byte[] bytes = new byte[4];
         accessFile.read(bytes);
-        Byte4 magicBytes = new Byte4(bytes,Long.toHexString(offset));
+        Byte4 magicBytes = new Byte4(bytes, Long.toHexString(offset));
         parseSymbol(magicBytes, accessFile, offset, bytesCount);
     }
 
@@ -83,7 +83,7 @@ public class ParseIOSSymbol {
     private void parseARMSymbol(Byte4 magicBytes, RandomAccessFile accessFile, long bytesCount) throws IOException {
         ARMSymbolReader symbolReader = new ARMSymbolReader(magicBytes, accessFile, bytesCount);
         ARMSymbol symbol = symbolReader.read();
-//        System.out.println(symbol.toString());
+        System.out.println(symbol.stringTable.content);
     }
 
     /**
@@ -97,6 +97,6 @@ public class ParseIOSSymbol {
     private void parseARM64Symbol(Byte4 magicBytes, RandomAccessFile accessFile, long bytesCount) throws IOException {
         ARM64SymbolReader symbolReader = new ARM64SymbolReader(magicBytes, accessFile, bytesCount);
         ARM64Symbol symbol = symbolReader.read();
-        System.out.println(symbol.toString());
+        System.out.println(symbol.stringTable.content);
     }
 }

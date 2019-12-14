@@ -23,23 +23,26 @@ public abstract class AssignCountBytes {
      */
     protected boolean isStrictConvertMode = true;
 
-    public String offset;
+    public String offsetHexStrOfBytes;
+
+    public long offsetOfBytes;
+
 
     public AssignCountBytes(byte[] bytes) {
         this(bytes, "unKnow");
     }
 
 
-    public AssignCountBytes(byte[] bytes, String offset) {
-        this(bytes, true, offset);
+    public AssignCountBytes(byte[] bytes, String offsetHexStrOfBytes) {
+        this(bytes, true, offsetHexStrOfBytes);
     }
 
-    public AssignCountBytes(byte[] bytes, boolean isStrictConvertMode, String offset) {
-        this(bytes, bytes.length, isStrictConvertMode, offset);
+    public AssignCountBytes(byte[] bytes, boolean isStrictConvertMode, String offsetHexStrOfBytes) {
+        this(bytes, bytes.length, isStrictConvertMode, offsetHexStrOfBytes);
     }
 
-    public AssignCountBytes(byte[] bytes, long bytesCount, String offset) {
-        this(bytes, bytesCount, true, offset);
+    public AssignCountBytes(byte[] bytes, long bytesCount, String offsetHexStrOfBytes) {
+        this(bytes, bytesCount, true, offsetHexStrOfBytes);
     }
 
     public AssignCountBytes(byte[] bytes, boolean isStrictConvertMode, long bytesCount) {
@@ -50,7 +53,7 @@ public abstract class AssignCountBytes {
         return bytesCount;
     }
 
-    public AssignCountBytes(byte[] bytes, long bytesCount, boolean isStrictConvertMode, String offset) {
+    public AssignCountBytes(byte[] bytes, long bytesCount, boolean isStrictConvertMode, String offsetHexStrOfBytes) {
         if (bytes == null) {
             throw new IllegalArgumentException("The byteArray can't be NULL");
         }
@@ -59,7 +62,14 @@ public abstract class AssignCountBytes {
         }
         this.bytes = bytes;
         this.isStrictConvertMode = isStrictConvertMode;
-        this.offset = offset;
+        this.offsetHexStrOfBytes = offsetHexStrOfBytes;
+        try {
+            this.offsetOfBytes = Long.parseLong(offsetHexStrOfBytes, 16);
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.offsetOfBytes = -1;
+        }
+
         this.bytesCount = bytesCount;
         checkBytesCount(bytes, bytesCount);
         hexStrData = ByteUtil.bytes2HexStr(bytes);
@@ -213,16 +223,14 @@ public abstract class AssignCountBytes {
     }
 
 
-
     /**
      * 将字节转换成为字符串，其中字节代表了 Ascii 码的字节
      *
      * @return 字符串
      */
     public String asciiBytesToStr() {
-        return asciiBytesToStr(true, true);
+        return asciiBytesToStr(false, true);
     }
-
 
 
     /**

@@ -19,7 +19,8 @@ public class ARM64LcSectionHeaderReader extends BaseAssignBytesCountReader<ARM64
 
     @Override
     protected void writeOffsetAndBytesCount(ARM64LcSectionHeaderBytes bytes) {
-        bytes.offsetOfBytes = getOffsetHexStr();
+        bytes.offsetHexStrOfBytes = getOffsetHexStr();
+        bytes.offsetOfBytes = getOffset();
         bytes.useBytesCount = maxBytesCount;
     }
 

@@ -27,14 +27,13 @@ public class ARM64LcReader extends BaseAssignBytesCountReader<ARM64Lc, ARM64LcBy
 
     @Override
     protected void writeOffsetAndBytesCount(ARM64LcBytes bytes) {
-        bytes.offsetOfBytes = getOffsetHexStr();
+        bytes.offsetHexStrOfBytes = getOffsetHexStr();
+        bytes.offsetOfBytes = getOffset();
         bytes.useBytesCount = maxBytesCount;
     }
 
     @Override
     protected ARM64Lc convertBytes2Model(ARM64LcBytes bytes) {
-        bytes.offsetOfBytes = getOffsetHexStr();
-        bytes.useBytesCount = maxBytesCount;
         return lcMapper.bytes2Model(bytes);
     }
 

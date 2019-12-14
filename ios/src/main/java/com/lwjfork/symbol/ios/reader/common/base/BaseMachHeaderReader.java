@@ -9,7 +9,6 @@ import java.io.RandomAccessFile;
 public abstract class BaseMachHeaderReader<T extends BaseMachHeader, V extends ARMMachHeaderBytes> extends BaseAssignBytesCountReader<T, V> {
 
 
-
     public BaseMachHeaderReader(long offset, RandomAccessFile accessFile, long maxBytesCount) {
         super(offset, accessFile, maxBytesCount);
     }
@@ -28,7 +27,8 @@ public abstract class BaseMachHeaderReader<T extends BaseMachHeader, V extends A
 
     @Override
     protected void writeOffsetAndBytesCount(V bytes) {
-        bytes.offsetOfBytes = bytes.magicNum.offset;
+        bytes.offsetHexStrOfBytes = bytes.magicNum.offsetHexStrOfBytes;
+        bytes.offsetOfBytes = bytes.magicNum.offsetOfBytes;
         bytes.useBytesCount = bytesCount;
     }
 

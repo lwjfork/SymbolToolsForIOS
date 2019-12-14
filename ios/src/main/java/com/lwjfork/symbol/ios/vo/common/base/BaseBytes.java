@@ -6,13 +6,11 @@ import lombok.Data;
 public abstract class BaseBytes {
 
 
-
     public long useBytesCount;
 
-    public String offsetOfBytes;
+    public String offsetHexStrOfBytes;
 
-
-
+    public long offsetOfBytes;
 
 
 }

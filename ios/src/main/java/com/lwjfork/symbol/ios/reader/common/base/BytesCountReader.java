@@ -7,7 +7,7 @@ import com.lwjfork.symbol.ios.vo.common.base.BytesCountBytes;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-public class BytesCountReader extends BaseAssignBytesCountReader<BytesCountStr, BytesCountBytes>{
+public class BytesCountReader extends BaseAssignBytesCountReader<BytesCountStr, BytesCountBytes> {
 
 
     public BytesCountReader(long offset, RandomAccessFile accessFile, long maxBytesCount) {
@@ -21,11 +21,16 @@ public class BytesCountReader extends BaseAssignBytesCountReader<BytesCountStr, 
 
     @Override
     protected BytesCountBytes readBytes() throws IOException {
-        return null;
+        accessFile.seek(offset);
+        BytesCountBytes bytesCountBytes = new BytesCountBytes();
+        bytesCountBytes.content = readAssignCountBytes((int) maxBytesCount);
+        return bytesCountBytes;
     }
 
     @Override
     protected void writeOffsetAndBytesCount(BytesCountBytes bytes) {
-
+        bytes.offsetHexStrOfBytes = getOffsetHexStr();
+        bytes.offsetOfBytes = getOffset();
+        bytes.useBytesCount = maxBytesCount;
     }
 }

@@ -26,7 +26,8 @@ public class FatHeaderReader extends BaseReader<FatHeader, FatHeaderBytes> {
 
     @Override
     protected void writeOffsetAndBytesCount(FatHeaderBytes bytes) {
-        bytes.offsetOfBytes = bytes.magicNum.offset;
+        bytes.offsetHexStrOfBytes = bytes.magicNum.offsetHexStrOfBytes;
+        bytes.offsetOfBytes = bytes.magicNum.offsetOfBytes;
         bytes.useBytesCount = bytesCount;
     }
 

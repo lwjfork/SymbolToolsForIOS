@@ -26,7 +26,8 @@ public class ARMLcSegmentReader extends BaseAssignBytesCountReader<ARMLcSegment,
 
     @Override
     protected void writeOffsetAndBytesCount(ARMLcSegmentBytes bytes) {
-        bytes.offsetOfBytes = bytes.commandSize.offset;
+        bytes.offsetHexStrOfBytes = bytes.command.offsetHexStrOfBytes;
+        bytes.offsetOfBytes = bytes.command.offsetOfBytes;
         bytes.useBytesCount = Bytes2LongMapper.INSTANCE.byte4ToLong(bytes.command);
     }
 
