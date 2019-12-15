@@ -4,6 +4,7 @@ import com.lwjfork.symbol.ios.constant.FatMagicNum;
 import com.lwjfork.symbol.ios.constant.MachMagicNums;
 import com.lwjfork.symbol.ios.model.arm.ARMSymbol;
 import com.lwjfork.symbol.ios.model.arm64.ARM64Symbol;
+import com.lwjfork.symbol.ios.model.common.base.BaseSymbol;
 import com.lwjfork.symbol.ios.model.common.header.FatArchHeader;
 import com.lwjfork.symbol.ios.model.common.header.FatHeader;
 import com.lwjfork.symbol.ios.reader.arm.ARMSymbolReader;
@@ -14,12 +15,15 @@ import com.lwjfork.symbol.tools.model.Byte4;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ParseIOSSymbol {
 
+    public List<BaseSymbol> symbols = Collections.synchronizedList(new ArrayList<>());
 
-    public void parseSymbol(String filePath) {
+    public List<BaseSymbol> parseSymbol(String filePath) {
         RandomAccessFile randomAccessFile = null;
         try {
             randomAccessFile = new RandomAccessFile(filePath, "r");
@@ -49,6 +53,8 @@ public class ParseIOSSymbol {
             }
 
         }
+
+        return symbols;
     }
 
     private void parseSymbol(FatArchHeader fatArchHeader, RandomAccessFile accessFile) throws IOException {
@@ -83,7 +89,7 @@ public class ParseIOSSymbol {
     private void parseARMSymbol(Byte4 magicBytes, RandomAccessFile accessFile, long bytesCount) throws IOException {
         ARMSymbolReader symbolReader = new ARMSymbolReader(magicBytes, accessFile, bytesCount);
         ARMSymbol symbol = symbolReader.read();
-        System.out.println(symbol.stringTable);
+        symbols.add(symbol);
     }
 
     /**
@@ -97,6 +103,6 @@ public class ParseIOSSymbol {
     private void parseARM64Symbol(Byte4 magicBytes, RandomAccessFile accessFile, long bytesCount) throws IOException {
         ARM64SymbolReader symbolReader = new ARM64SymbolReader(magicBytes, accessFile, bytesCount);
         ARM64Symbol symbol = symbolReader.read();
-        System.out.println(symbol.stringTable);
+        symbols.add(symbol);
     }
 }

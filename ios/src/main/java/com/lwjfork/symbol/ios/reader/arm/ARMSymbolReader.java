@@ -42,6 +42,9 @@ public class ARMSymbolReader extends BaseAssignBytesCountReader<ARMSymbol, ARMSy
 
         armSymbolBytes.machHeader = new ARMMachHeaderReader(offset, accessFile).readBytesFinal();
 
+        armSymbolBytes.cpuType = armSymbolBytes.machHeader.cpuType;
+        armSymbolBytes.cpuSubType = armSymbolBytes.machHeader.cpuSubType;
+
         long commandNum = Bytes2LongMapper.INSTANCE.byte4ToLong(armSymbolBytes.machHeader.commandsNum);
         long commandSize = Bytes2LongMapper.INSTANCE.byte4ToLong(armSymbolBytes.machHeader.commandSize);
         long lcOffset = getOffset() + armSymbolBytes.machHeader.useBytesCount;
