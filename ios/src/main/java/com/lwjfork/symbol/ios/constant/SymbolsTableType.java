@@ -1,7 +1,7 @@
 package com.lwjfork.symbol.ios.constant;
 
 /**
- * SymbolsTable  区域中的 type 字段
+ *
  */
 
 /**
@@ -20,6 +20,9 @@ package com.lwjfork.symbol.ios.constant;
  * that has never been well documented.
  * <p>
  * ref https://github.com/fangshufeng/MachOView/blob/master/MachOView-master/mach-o/nlist.h
+ *
+ *
+ * SymbolsTable  区域中的 type 字段
  */
 public class SymbolsTableType {
 
