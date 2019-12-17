@@ -10,3 +10,10 @@ iml
 /captures
 .externalNativeBuild
 
+/src/main/java/com/lwjfork/symbol/test/addr2line.java
+/src/main/java/com/lwjfork/symbol/test/Configuration.java
+/src/main/java/com/lwjfork/symbol/test/Dwarf2NameFinder.java
+/src/main/java/com/lwjfork/symbol/test/KK.java
+/src/main/java/com/lwjfork/symbol/test/RangeMap.java
+/src/main/java/com/lwjfork/symbol/test/SectionFinder.java
+/libs/peter-dwarf-20160709.jar
